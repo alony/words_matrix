@@ -1,0 +1,2 @@
+class WordsMatrix::Dictionary
+end
