@@ -1,6 +1,7 @@
 module WordsMatrix::Config
   DEFAULTS = {
     n: 10,
-    dict: "data/dict.txt"
+    min_length: 3,
+    dict_path: "data/dict.txt"
   }
 end

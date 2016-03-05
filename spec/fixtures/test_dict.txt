@@ -1,0 +1,9 @@
+
+AA rough, cindery lava [n -S]
+JAZZ to {enliven=v} [v -ED, -ING, -ES]
+ALBUM a book for preserving photographs or stamps [n -S]
+PHYLLOME a leaf of a plant [n -S]
+PHYSICAL a medical examination of the body [n -S]
+PHYSIQUE the form or structure of the body [n -S]
+PHYTANES <phytane=n> [n]
+PHYTONIC <phyton=n> [adj]
