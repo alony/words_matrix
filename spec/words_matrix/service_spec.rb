@@ -40,4 +40,54 @@ describe WordsMatrix::Service do
       end
     end
   end
+
+  describe "#find_words" do
+    let(:sample_grid) {
+      [
+        %w[A B C D E X],
+        %w[F B L I M P],
+        %w[K L M N O S],
+        %w[P Q R S T X],
+        %w[U V W A Y X],
+        %w[A B C D E X]
+      ]
+    }
+    let(:service) { WordsMatrix::Service.new(n: 6, min_length: 4) }
+
+    before { allow_any_instance_of(WordsMatrix::Matrix).to receive(:generate_grid).and_return(sample_grid) }
+
+    it "should find all words not shorter than 4 chars" do
+      expected_result = [
+        "BLIMP a nonrigid aircraft [n -S] : BLIMPISH [adj]",
+        "DINS <din=v> [v]",
+        "EARL a British nobleman [n -S]",
+        "LIMP lacking rigidity [adj LIMPER, LIMPEST] / to walk lamely [v -ED, -ING, -S]",
+        "TOME a large book [n -S]"]
+      service.find_words
+
+      expect(service.words).to eq(expected_result)
+    end
+  end
+
+  describe "#to_s" do
+    let(:service) { WordsMatrix::Service.new(n: 6, min_length: 4, dict_path: 'spec/fixtures/test_dict.txt') }
+
+    before { service.find_words }
+
+    it "should print the matrix content" do
+      expect( service.to_s ).to include(service.matrix.to_s)
+    end
+
+    it "should print the words found" do
+      expect(service.to_s).to include(service.words.join("\n"))
+    end
+
+    context "no words found" do
+      it "should print a related message" do
+        allow(service).to receive(:words).and_return([])
+
+        expect(service.to_s).to include("Words found:\nnone :(")
+      end
+    end
+  end
 end
