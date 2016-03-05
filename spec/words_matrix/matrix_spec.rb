@@ -2,10 +2,24 @@ require 'spec_helper'
 
 describe WordsMatrix::Matrix do
   let(:matrix) {WordsMatrix::Matrix.new(6, 4)}
+  let(:sample_grid) {
+    [
+      %w[A B C D E X],
+      %w[F G H I J X],
+      %w[K L M N O X],
+      %w[P Q R S T X],
+      %w[U V W X Y X],
+      %w[A B C D E X]
+    ]
+  }
 
   describe "#initialize" do
     it "should initialize grid" do
       expect(matrix.grid).not_to be_nil
+    end
+
+    it "should parse grid to tokens" do
+      expect(matrix.tokens).not_to be_empty
     end
   end
 
@@ -20,6 +34,15 @@ describe WordsMatrix::Matrix do
     end
   end
 
+  describe "#tokens" do
+    before { allow_any_instance_of(WordsMatrix::Matrix).to receive(:generate_grid).and_return([["A", "B", "C"],["D", "E", "F"], ["G", "H", "I"]]) }
+    let(:matrix) { WordsMatrix::Matrix.new(3, 3) }
+
+    it "should exclude too short tokens" do
+      expect(matrix.tokens.keys).not_to include("E")
+    end
+  end
+
   describe "#words_from" do
     it "should skip all combinations shorter than min_length" do
       expect(matrix.words_from(1, 0).any?{ |el| el.size < 4 }).to be false
@@ -27,14 +50,6 @@ describe WordsMatrix::Matrix do
 
     context "letter check" do
       before do
-        sample_grid = [
-          %w[A B C D E X],
-          %w[F G H I J X],
-          %w[K L M N O X],
-          %w[P Q R S T X],
-          %w[U V W X Y X],
-          %w[A B C D E X]
-        ]
         allow_any_instance_of(WordsMatrix::Matrix).to receive(:generate_grid).and_return(sample_grid)
       end
 

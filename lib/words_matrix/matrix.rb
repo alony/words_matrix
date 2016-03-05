@@ -1,10 +1,11 @@
 class WordsMatrix::Matrix
-  attr_reader :grid
+  attr_reader :grid, :tokens
 
   def initialize(n, min_length)
     @n = n
     @min_length = min_length
     @grid = generate_grid
+    parse_to_tokens!
   end
 
   def to_s
@@ -37,6 +38,17 @@ class WordsMatrix::Matrix
        (rand(4).zero? ? consonants : vowels).sample
      end
    end
+  end
+
+  def parse_to_tokens!
+    @tokens = Hash.new([])
+
+    (0...@n).each do |x|
+      (0...@n).each do |y|
+        words = words_from(x, y)
+        @tokens[@grid[x][y]] += words if words.any?
+      end
+    end
   end
 
   def horizontal_line(y_range, x)
