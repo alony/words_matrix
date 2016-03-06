@@ -2,7 +2,9 @@ class WordsMatrix::Service
   attr_reader :matrix, :dictionary, :words
 
   def initialize(config={})
-    config = WordsMatrix::Config::DEFAULTS.merge(config)
+    config = WordsMatrix::Config::DEFAULTS.merge(config) { |key, default, local|
+      local || default
+    }
 
     validate_options!(config)
     @matrix = WordsMatrix::Matrix.new(config[:n].to_i, config[:min_length].to_i)

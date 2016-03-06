@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby -wU
+
+require 'rubygems'
+require 'thor'
+require 'words_matrix'
+
+module WordsMatrix
+  class CLI < Thor
+    desc 'search', 'Words search in a random letter matrix'
+    option :n,               type: :numeric, desc: 'Size of letter grid. Optional, default is 10.'
+    option :min_length,      type: :numeric, desc: 'Minimum word length. Optional, default is 3.'
+    option :dictionary_path, type: :string,  desc: 'A path to dictionary with words, in case some external dictionary should be used. Internal dictionary is used by default.'
+
+    def search
+
+      service = WordsMatrix::Service.new(n: options["n"], min_length: options["min_length"], dict_path: options["dictionary_path"])
+      puts "Letter grid created. Searching for words."
+
+      service.find_words
+      puts service
+    rescue => e
+      puts "Error while execution: #{e.message}"
+    end
+  end
+end
+
+WordsMatrix::CLI.start(ARGV)

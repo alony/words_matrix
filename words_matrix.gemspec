@@ -19,17 +19,17 @@ Gem::Specification.new do |spec|
 
     (The words can be on reverse order)
   }
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/alony/words_matrix"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = ["words_matrix"]
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib", "data"]
 
-  spec.add_runtime_dependency "cri"
+  spec.add_runtime_dependency "thor"
 
-  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-its"
