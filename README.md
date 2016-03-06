@@ -38,3 +38,27 @@ Or install it yourself as:
 All the options are optional. Example usage with options:
 
 `words_matrix search -n=6 --min_length=4 --dictionary_path='spec/fixtures/test_dict.txt'`
+
+Sample output:
+
+      words_matrix alona.mekhovova$ words_matrix search -n=6
+
+      Letter grid created. Searching for words.
+      Matrix:
+      U E C O A E
+      P E E O Z A
+      A G M V U O
+      U Z T A I U
+      Q U A I O A
+      E E I O I A
+
+      Words found:
+      OVA <ovum=n> [n]
+      AZO containing nitrogen [adj]
+      AVO a monetary unit of Macao [n AVOS]
+      PEE to urinate -- sometimes considered vulgar [v PEED, PEEING, PEES]
+      GEE to turn to the right [v GEED, GEEING, GEES]
+      MOA an extinct flightless bird [n -S]
+      VEE the letter V [n -S]
+      QUA in the capacity of [adv]
+      QUAI {quay=n} [n -S]
